@@ -1,0 +1,5 @@
+<h1>Edit Fixture</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.fixture_path(@conn, :update, @fixture)) %>
+
+<span><%= link "Back", to: Routes.fixture_path(@conn, :index) %></span>

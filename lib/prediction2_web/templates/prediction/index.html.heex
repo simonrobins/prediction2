@@ -1,0 +1,75 @@
+<h1>Predictions for <%= @user.name%> (<%= @user.initials %>)</h1>
+<h2>Current Score <%= @current_score %></h2>
+<h3>Page <%= @paginator.current_page_number %> of <%= @paginator.num_pages %>.</h3>
+<h3>
+  <%= if @paginator.current_page_number > 1 do %>
+  <a href={"/users/#{@user.id}/predictions/1"}>First</a>
+  <% end %>
+  <%= if @paginator.previous_page_number do %>
+  <a href={"/users/#{@user.id}/predictions/#{@paginator.previous_page_number}"}>Previous</a>
+  <% end %>
+  <%= if @paginator.next_page_number do %>
+  <a href={"/users/#{@user.id}/predictions/#{@paginator.next_page_number}"}>Next</a>
+  <% end %>
+  <%= if @paginator.current_page_number < @paginator.num_pages do %>
+  <a href={"/users/#{@user.id}/predictions/#{@paginator.num_pages}"}>Last</a>
+  <% end %>
+</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Home</th>
+      <th>Away</th>
+      <th>Prediction</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for fixture <- @fixtures do %>
+    <tr>
+      <td><%= fixture.date %></td>
+      <td><%= fixture.home %></td>
+      <td><%= fixture.away %></td>
+      <td>
+        <%= unless fixture.result do %>
+        <select user-id={@user.id} fixture-id={fixture.fixture_id} onchange="window.updatePrediction(this)">
+          <option value="H">Home</option>
+          <option value="A">Away</option>
+          <option value="D">Draw</option>
+        </select>
+        <% else %>
+        <select>
+          <option value="H">Home</option>
+          <option value="A">Away</option>
+          <option value="D">Draw</option>
+        </select>
+        <% end %>
+      </td>
+      <td>
+        <select>
+          <%= unless fixture.result do %><option>Home</option><% end %>
+          <%= if fixture.result == "H" do %><option>Home</option><% end %>
+          <%= if fixture.result == "A" do %><option>Away</option><% end %>
+          <%= if fixture.result == "D" do %><option>Draw</option><% end %>
+        </select>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+<h3>Page <%= @paginator.current_page_number %> of <%= @paginator.num_pages %>.</h3>
+<h3>
+  <%= if @paginator.current_page_number > 1 do %>
+  <a href={"/users/#{@user.id}/predictions/1"}>First</a>
+  <% end %>
+  <%= if @paginator.previous_page_number do %>
+  <a href={"/users/#{@user.id}/predictions/#{@paginator.previous_page_number}"}>Previous</a>
+  <% end %>
+  <%= if @paginator.next_page_number do %>
+  <a href={"/users/#{@user.id}/predictions/#{@paginator.next_page_number}"}>Next</a>
+  <% end %>
+  <%= if @paginator.current_page_number < @paginator.num_pages do %>
+  <a href={"/users/#{@user.id}/predictions/#{@paginator.num_pages}"}>Last</a>
+  <% end %>
+</h3>

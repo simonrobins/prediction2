@@ -1,0 +1,23 @@
+<.form let={f} for={@changeset} action={@action}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :date %>
+  <%= date_select f, :date %>
+  <%= error_tag f, :date %>
+
+  <%= label f, :home %>
+  <%= select f, :home_id, Enum.map(@teams, &{&1.name, &1.id}) %>
+  <%= error_tag f, :home %>
+
+  <%= label f, :away %>
+  <%= select f, :away_id, Enum.map(@teams, &{&1.name, &1.id}) %>
+  <%= error_tag f, :away %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+</.form>

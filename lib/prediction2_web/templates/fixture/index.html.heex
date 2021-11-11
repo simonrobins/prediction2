@@ -1,0 +1,64 @@
+<h1>Fixtures</h1>
+<h3>Page <%= @paginator.current_page_number %> of <%= @paginator.num_pages %>.</h3>
+<h3>
+  <%= if @paginator.current_page_number > 1 do %>
+  <a href={"/fixtures/1"}>First</a>
+  <% end %>
+  <%= if @paginator.previous_page_number do %>
+  <a href={"/fixtures/#{@paginator.previous_page_number}"}>Previous</a>
+  <% end %>
+  <%= if @paginator.next_page_number do %>
+  <a href={"/fixtures/#{@paginator.next_page_number}"}>Next</a>
+  <% end %>
+  <%= if @paginator.current_page_number < @paginator.num_pages do %>
+  <a href={"/fixtures/#{@paginator.num_pages}"}>Last</a>
+  <% end %>
+</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Home</th>
+      <th>Away</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for fixture <- @fixtures do %>
+    <tr>
+      <td><%= fixture.date %></td>
+      <td><%= fixture.home %></td>
+      <td><%= fixture.away %></td>
+      <td>
+        <!--  -->
+        <select fixture-id={fixture.id} onchange="window.updateFixture(this)">
+          <option></option>
+          <%= if fixture.result == "H" do %><option selected value="H">Home</option>
+          <% else %><option value="H">Home</option>
+          <% end %>
+          <%= if fixture.result == "A" do %><option selected value="H">Away</option>
+          <% else %><option value="A">Away</option>
+          <% end %>
+          <%= if fixture.result == "D" do %><option selected value="H">Draw</option>
+          <% else %><option value="D">Draw</option>
+          <% end %>
+        </select>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+<h3>Page <%= @paginator.current_page_number %> of <%= @paginator.num_pages %>.</h3>
+<h3>
+  <%= if @paginator.current_page_number > 1 do %>
+  <a href={"/fixtures/1"}>First</a>
+  <% end %>
+  <%= if @paginator.previous_page_number do %>
+  <a href={"/fixtures/#{@paginator.previous_page_number}"}>Previous</a>
+  <% end %>
+  <%= if @paginator.next_page_number do %>
+  <a href={"/fixtures/#{@paginator.next_page_number}"}>Next</a>
+  <% end %>
+  <%= if @paginator.current_page_number < @paginator.num_pages do %>
+  <a href={"/fixtures/#{@paginator.num_pages}"}>Last</a>
+  <% end %>
+</h3>
